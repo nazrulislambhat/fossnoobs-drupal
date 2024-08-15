@@ -7,6 +7,10 @@
   background-color: #017fd5;
 }
 
+body {
+  background-color: #12d16f;
+}
+
 .featured-conferences .slick-list .slick-slide .conferences-card::before,
 .past-conferences .slick-list .slick-slide .conferences-card::before {
   background-color: #017fd5;
