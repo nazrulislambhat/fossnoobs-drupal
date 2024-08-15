@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the spec theme.
+ */
+function fossnoobs_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'views_view__' . $variables['view']->id();
+}
+function fossnoobs_theme_suggestions_views_view_unformatted_alter(array &$suggestions, array $variables) {
+  $suggestions[] = 'views_view_unformatted__' . $variables['view']->id();
+}
+function fossnoobs_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook == 'form' & !empty($variables['element']['#id'])) {
+          $suggestions[] = 'form__' . str_replace('-', '_', $variables['element']['#id']);
+  }
+}
+
+function fossnoobs_preprocess_block(&$variables) {
+  $variables['featured'] = views_embed_view('featured_conferences', 'featured_conferences');
+  $variables['past'] = views_embed_view('past_conferences', 'past_conferences');
+  $variables['recommended'] = views_embed_view('recommended_conferences', 'recommended_conferences');
+}
+
+function fossnoobs_preprocess_views_view(&$variables) {
+  // Get the view ID from the view object.
+  $view_id = $variables['view']->id();
+
+  // Check if the view ID matches any of the target views.
+  $target_views = [
+    'past_conferences',
+    'featured_conferences',
+    'recommended_conferences',
+  ];
+
+  // Attach the conference-slider library if the view ID matches.
+  if (in_array($view_id, $target_views)) {
+    $variables['#attached']['library'][] = 'fossnoobs/conference-slider';
+  }
+}

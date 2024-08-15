@@ -1,0 +1,31 @@
+$breakpoints: (
+  mobile: 0,
+  tablet: 768px,
+  small-desktop: 1025px,
+  desktop: 1440px,
+);
+
+@mixin breakpoint($device) {
+  // Fetch the breakpoint value from the map
+  $min-width: map-get($breakpoints, $device);
+
+  @if $device == mobile {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $device == tablet {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $device == small-desktop {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  } @else if $device == desktop {
+    @media (min-width: 1440px) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$device}' not found in map.";
+  }
+}

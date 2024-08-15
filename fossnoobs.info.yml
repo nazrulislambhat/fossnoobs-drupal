@@ -1,0 +1,15 @@
+name: "fossnoobs"
+type: theme
+description: "A custom Drupal theme fossnoobs"
+core_version_requirement: ^11
+package: Custom
+base theme: stable9
+
+libraries:
+  - fossnoobs/global
+
+regions:
+  header: "Header"
+  content: "Content"
+  sidebar: "Sidebar"
+  footer: "Footer"
