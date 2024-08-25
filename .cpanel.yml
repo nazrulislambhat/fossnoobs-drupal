@@ -10,4 +10,4 @@ deployment:
     # Set the appropriate permissions for the files and directories
     - find $DEPLOYPATH -type d -exec chmod 755 {} \;
     - find $DEPLOYPATH -type f -exec chmod 644 {} \; 
-    - echo "Deployment completed successfully. Checking"
+    - echo "Deployment completed successfully."
