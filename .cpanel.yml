@@ -1,18 +1,13 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/hackinh8/public_html/drupal.fossnoobs.com/themes/custom/fossnoobs
-
-    - echo "Starting deployment process..."
-
-    # Pull the latest changes from the GitHub repository
-    - /usr/local/cpanel/3rdparty/bin/git pull origin main
-
-    # Synchronize the GitHub repository's files with your Drupal theme directory
-    - rsync -avz --delete $GIT_WORK_TREE/ $DEPLOYPATH/
-
-    # Set the appropriate permissions for the files
+    - export DEPLOYPATH=/home/your_cpanel_username/public_html/themes/custom/fossnoobs
+    - echo "Starting deployment process..." 
+    # Create the target directory if it doesn't exist
+    - mkdir -p $DEPLOYPATH
+    # Synchronize the GitHub repository's fossnoobs folder with the target directory
+    - rsync -avz --delete fossnoobs/ $DEPLOYPATH/ 
+    # Set the appropriate permissions for the files and directories
     - find $DEPLOYPATH -type d -exec chmod 755 {} \;
-    - find $DEPLOYPATH -type f -exec chmod 644 {} \;
-
+    - find $DEPLOYPATH -type f -exec chmod 644 {} \; 
     - echo "Deployment completed successfully."
